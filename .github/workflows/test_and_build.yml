@@ -37,7 +37,7 @@ jobs:
     - name: Run tests
       run: make test
     - name: Convert coverage to lcov
-      uses: jandelgado/gcov2lcov-action@v2
+      uses: jandelgado/gcov2lcov-action@v1
       with:
           infile: coverage.out
           outfile: coverage.lcov
@@ -45,6 +45,7 @@ jobs:
       uses: coverallsapp/github-action@v1.0.1
       with:
           path-to-lcov: coverage.lcov
+          github-token: ${{ secrets.github_token }}
 
   build:
     runs-on: ubuntu-latest
