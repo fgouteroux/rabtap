@@ -36,27 +36,6 @@ jobs:
       uses: actions/checkout@v1
     - name: Run tests
       run: make test
-
-  coverage:
-    runs-on: ubuntu-latest
-    services:
-      rabbitmq:
-        image: rabbitmq:3.7-management
-        ports:
-          - 5672:5672
-          - 15672:15672
-    steps:
-    - name: Install Go
-      if: success()
-      uses: actions/setup-go@v1
-      with:
-        go-version: 1.13.x
-    - name: Checkout code
-      uses: actions/checkout@v1
-    - name: Calc coverage 
-      run: |
-        export PATH=$PATH:$(go env GOPATH)/bin   
-        make coverage
     - name: Convert coverage to lcov
       uses: jandelgado/gcov2lcov-action@v2
       with:
